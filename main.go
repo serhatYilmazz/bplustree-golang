@@ -60,5 +60,6 @@ func main() {
 	bt.Add(58, 2)
 	bt.Add(59, 2)
 
+
 	bt.PrintPreOrder(bt.Root, bt.Height)
 }

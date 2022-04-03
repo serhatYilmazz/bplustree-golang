@@ -8,7 +8,8 @@ import (
 
 type BPTree interface {
 	Add(key int, value int)
-	PrintPreOrder(n *Node)
+	PrintPreOrder(n *Node, height int)
+	Search(key int)
 	//TODO add remove, update
 }
 
@@ -150,4 +151,26 @@ func (bt *BpTree) PrintPreOrder(n *Node, ht int) {
 		bt.PrintPreOrder(&n.Children[i], ht-1)
 	}
 
+}
+
+func (bt *BpTree) Search(key int) interface{} {
+	return search(key, bt.Root, bt.Height)
+}
+
+func search(key int, n *Node, ht int) interface{} {
+	if ht == 0	{
+		for i := 0; i < n.NodeLoad; i++ {
+			if n.Entry[i].Key == key {
+				return n.Entry[i].Value
+			}
+		}
+		fmt.Printf("Not found: %d", key)
+	} else {
+		j := 0
+		for ; util.LessOrEqual(n.Entry[j].Key, key) && j < n.NodeLoad; j++ {
+		}
+		return search(key, &n.Children[j], ht-1)
+	}
+
+	return nil
 }
